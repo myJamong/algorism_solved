@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/2606
+# 바이러스
 from collections import deque
 if __name__ == "__main__":
     node = int(input()) # 컴퓨터 수
