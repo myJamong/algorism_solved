@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/9095
-# 1,2,3 더하기
+# 1,2,3 더하기(Top-Down)
 
 import sys
 def dfs(num):
