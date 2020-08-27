@@ -10,7 +10,7 @@ if __name__ == "__main__":
     dp[1] = arr[1]
     for i in range(2,n+1):
         temp = [arr[i]]
-        for j in range(1,i+1):
+        for j in range(1,i):
             temp.append(dp[i-j]+arr[j])
         dp[i] = max(temp)
     print(dp[n])
