@@ -3,15 +3,12 @@
 
 import sys
 if __name__ == "__main__":
-    n = int(sys.stdin.readline())
+    read = sys.stdin.readline
+    n = int(read())
+    dp = [[0,0]] * (42)
+    dp[0] = [1,0]
+    dp[1] = [0,1]
+    for i in range(2,42):
+        dp[i] = [dp[i-1][0]+dp[i-2][0],dp[i-1][1]+dp[i-2][1]]
     for _ in range(n):
-        num = int(sys.stdin.readline())    
-        arr = [(0,0)] * (num+2)
-        arr[0] = (1,0)
-        arr[1] = (0,1)
-        if num < 2:
-            print(' '.join(map(str,arr[num])))
-            continue
-        for i in range(2,num+1):
-            arr[i] = (arr[i-1][0]+arr[i-2][0],arr[i-1][1]+arr[i-2][1])
-        print(' '.join(map(str,arr[num])))
+        print(' '.join(map(str,dp[int(read())])))
