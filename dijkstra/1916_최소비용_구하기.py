@@ -2,7 +2,7 @@
 # 최소비용 구하기
 
 import sys
-import heapq # 힙을 사용하여 최소비용 산정
+import heapq
 if __name__ == "__main__":
     INF = sys.maxsize
     read = sys.stdin.readline
@@ -14,16 +14,18 @@ if __name__ == "__main__":
         s,e,c = map(int,read().split())
         graph[s].append((e,c))
     start,end = map(int,read().split())
-    costs[start] = 0 # 시작점에서 시작점은 0
+    costs[start] = 0
     q = []
-    heapq.heappush(q,start)
+    heapq.heappush(q,(0,start))
     while q:
-        now = heapq.heappop(q)
+        now_val,now = heapq.heappop(q)
+        if end == now: # heapq 를 사용하는 이유 --> 최소거리기준으로 넣기 때문에 도착 지점을 만나면 바로 break
+            break
         for i in graph[now]:
             e,c = i
-            if c >= costs[e] or costs[now] >= costs[e]: # 이미 정해진 비용보다 합산중 일부가 큰 경우 그냥 패스
+            if c >= costs[e] or now_val >= costs[e]:
                 continue
-            if costs[e] > costs[now] + c: 
-                costs[e] = costs[now] + c
-                heapq.heappush(q,e) # 최소비용으로 갱신되는 부분만 힙에추가 --> 임시적 최소비용
-    print(costs[end])    
+            if costs[e] > now_val + c:
+                costs[e] = now_val + c
+                heapq.heappush(q,(costs[e],e))
+    print(costs[end])     
